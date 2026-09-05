@@ -6,17 +6,23 @@
     <title>Ziyo Lider Akademiyasi</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary: #059669;
-            --primary-dark: #047857;
-            --primary-light: #ecfdf5;
-            --dark: #0f172a;
-            --gray-text: #64748b;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --accent: #f59e0b;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --secondary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --border: #e2e8f0;
+            --radius: 14px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -27,523 +33,1830 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: #f1f5f9;
             color: var(--dark);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Navigation */
-        nav {
+        /* Navigation Header */
+        header {
             background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 14px 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
+            font-size: 1.35rem;
             font-weight: 800;
-            font-size: 1.15rem;
-            color: #065f46;
-            letter-spacing: -0.5px;
+            color: var(--primary);
+            text-decoration: none;
         }
 
-        .logo-badge {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        .logo i {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.25rem;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
         }
 
-        .nav-btn {
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 0.7rem 1.35rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
             background: var(--primary);
             color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
         }
 
-        .nav-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--light);
+        }
+
+        .btn-danger {
+            background: var(--danger);
             color: white;
-            padding: 70px 20px 60px;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1280px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        /* Hero / Welcome Landing */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            color: white;
+            border-radius: 24px;
+            padding: 4rem 2rem;
             text-align: center;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.3);
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: rgba(16, 185, 129, 0.1);
-            filter: blur(120px);
-            border-radius: 50%;
-            top: -100px;
-            left: -100px;
-        }
-
-        .hero-badge {
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(52, 211, 153, 0.4);
-            color: #34d399;
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: inline-block;
-            margin-bottom: 20px;
         }
 
         .hero h1 {
-            font-size: 2.3rem;
-            font-weight: 900;
-            margin-bottom: 16px;
-            line-height: 1.2;
-            letter-spacing: -1px;
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
         }
 
         .hero p {
-            color: #cbd5e1;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-size: 1.05rem;
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 650px;
+            margin: 0 auto 2.5rem auto;
+            line-height: 1.6;
         }
 
-        /* Reward Card */
-        .reward-card {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-            color: #0f172a;
-            padding: 24px;
-            border-radius: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.25);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            position: relative;
-            transform: translateY(0);
-            transition: transform 0.3s ease;
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(6px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
-        .reward-card:hover {
-            transform: translateY(-4px);
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        .reward-card h3 {
+        .modal {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 820px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.95) translateY(10px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .close-modal {
+            background: var(--light);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--gray);
+            transition: background 0.2s;
+        }
+
+        .close-modal:hover {
+            background: var(--border);
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: all 0.2s;
+            background: var(--light);
+        }
+
+        .form-control:focus {
+            outline: none;
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Dashboard Common */
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .user-info-badge {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.35rem;
             font-weight: 800;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.6);
         }
 
-        .reward-card p {
-            color: #1e293b;
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.75rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .stat-icon.purple { background: #e0e7ff; color: var(--primary); }
+        .stat-icon.cyan { background: #cffafe; color: var(--secondary); }
+        .stat-icon.green { background: #d1fae5; color: var(--success); }
+        .stat-icon.amber { background: #fef3c7; color: var(--warning); }
+
+        .stat-details h4 {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.35rem;
             font-weight: 600;
-            font-size: 0.95rem;
-            margin: 0;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Announcement Section */
-        .offer-card {
-            background: var(--card-bg);
-            border-radius: 24px;
-            padding: 35px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-            border: 1px solid #e2e8f0;
-            position: relative;
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
-
-        .tag {
-            position: absolute;
-            top: 0;
-            right: 0;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            padding: 8px 20px;
-            border-bottom-left-radius: 16px;
-            font-weight: 700;
-            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
         }
 
-        .offer-title {
-            font-size: 1.55rem;
-            color: var(--dark);
-            margin-bottom: 12px;
+        .stat-details .value {
+            font-size: 1.75rem;
             font-weight: 800;
-            letter-spacing: -0.5px;
-            max-width: 80%;
+            color: var(--dark);
         }
 
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin: 25px 0;
+        /* Tables & Cards */
+        .card {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
         }
 
-        .info-box {
-            background: #f8fafc;
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .info-box h4 {
-            color: var(--primary);
-            margin-bottom: 14px;
-            font-size: 1.1rem;
+        .card-title {
+            font-size: 1.3rem;
             font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--dark);
         }
 
-        .info-box ul {
-            list-style: none;
+        .table-responsive {
+            overflow-x: auto;
         }
 
-        .info-box li {
-            margin-bottom: 10px;
-            font-size: 0.95rem;
-            color: #334155;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 1.15rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 700;
+            color: var(--gray);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: var(--light);
+        }
+
+        tr {
+            transition: background 0.15s;
+        }
+
+        tr:hover td {
+            background: var(--light);
+        }
+
+        /* Shop Grid */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .shop-item {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .shop-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .shop-item i {
+            font-size: 3rem;
+            color: var(--warning);
+            background: #fef3c7;
+            width: 80px;
+            height: 80px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 16px rgba(245, 158, 11, 0.2);
+        }
+
+        .shop-item h5 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .shop-item .price {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            background: #e0e7ff;
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border-radius: 20px;
+        }
+
+        /* Payment alert banner */
+        .alert-banner {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+            padding: 1.25rem 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.05);
         }
 
-        .price-box {
-            background: var(--primary-light);
-            padding: 24px;
-            border-radius: 16px;
-            border: 1px solid #a7f3d0;
+        .alert-banner.warning {
+            background: #fffbeb;
+            border-color: #fde68a;
+            color: #92400e;
+        }
+
+        .alert-banner.success {
+            background: #ecfdf5;
+            border-color: #a7f3d0;
+            color: #065f46;
+        }
+
+        .badge {
+            padding: 0.4rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-success { background: #d1fae5; color: var(--success); }
+        .badge-danger { background: #fee2e2; color: var(--danger); }
+        .badge-warning { background: #fef3c7; color: var(--warning); }
+
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 1.75rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.75rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.75rem 1.25rem;
+            font-weight: 700;
+            color: var(--gray);
+            cursor: pointer;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Calendar grid in modal */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+        .calendar-day {
+            border-radius: 10px;
+            padding: 8px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            min-height: 90px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 6px;
+            align-items: flex-start;
         }
-
-        .old-price {
-            text-decoration: line-through;
-            color: var(--gray-text);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .new-price {
-            font-size: 2.1rem;
-            font-weight: 900;
-            color: var(--primary-dark);
-            margin: 4px 0;
-            letter-spacing: -1px;
-        }
-
-        .note {
-            background: #fffbeb;
-            border-left: 4px solid var(--accent);
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            color: #92400e;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Courses Grid */
-        .section-title {
-            text-align: center;
-            font-size: 1.8rem;
-            margin-bottom: 35px;
-            color: var(--dark);
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
-        }
-
-        .course-card {
-            background: var(--card-bg);
-            padding: 24px 20px;
-            border-radius: 20px;
-            border: 1px solid #e2e8f0;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        }
-
-        .course-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--primary);
-            box-shadow: 0 12px 25px rgba(5, 150, 105, 0.08);
-        }
-
-        .course-icon {
-            font-size: 2.2rem;
-            margin-bottom: 14px;
-            background: var(--primary-light);
-            width: 64px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 18px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .course-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 6px;
+        .calendar-day .day-header {
             font-weight: 700;
-            color: var(--dark);
-        }
-
-        .course-card p {
             font-size: 0.85rem;
-            color: var(--gray-text);
         }
-
-        /* Contact Section */
-        .contact-card {
-            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-            color: white;
-            border-radius: 24px;
-            padding: 35px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            align-items: center;
-            box-shadow: 0 15px 35px rgba(5, 150, 105, 0.2);
+        .calendar-day input[type="number"] {
+            width: 100%;
+            border-radius: 8px;
+            padding: 6px;
+            border: 1px solid var(--border);
         }
-
-        .contact-info h3 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-        }
-
-        .contact-item {
-            margin-bottom: 12px;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .contact-item a {
-            color: #6ee7b7;
-            text-decoration: none;
-            font-weight: 700;
-            transition: color 0.2s;
-        }
-
-        .contact-item a:hover {
-            color: #ffffff;
-            text-decoration: underline;
-        }
-
-        .cta-btn {
-            display: block;
-            background: var(--accent);
-            color: var(--dark);
-            text-align: center;
-            padding: 16px;
-            border-radius: 14px;
-            font-weight: 800;
-            text-decoration: none;
-            font-size: 1.05rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        .cta-btn:hover {
-            background: #d97706;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 1.75rem;
-            }
-            .offer-title {
-                font-size: 1.3rem;
-                max-width: 100%;
-                padding-right: 40px;
-            }
-            .offer-card {
-                padding: 25px 20px;
-            }
-            .new-price {
-                font-size: 1.8rem;
-            }
-            .contact-card {
-                padding: 25px 20px;
-            }
+        .calendar-day textarea {
+            width: 100%;
+            border-radius: 8px;
+            padding: 6px;
+            border: 1px solid var(--border);
+            resize: vertical;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">
-            <div class="logo-badge">Z</div>
-            <span>ZIYO LIDER</span>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Ziyo Lider Akademiyasi</span>
+        </a>
+        <div class="nav-actions" id="headerNavActions">
+            <button class="btn btn-primary" onclick="openLoginModal()">
+                <i class="fa-solid fa-right-to-bracket"></i> Kirish
+            </button>
         </div>
-        <a href="tel:+998945991341" class="nav-btn">📞 Qo'ng'iroq</a>
-    </nav>
+    </header>
 
-    <section class="hero">
-        <span class="hero-badge">Sertifikat Guruhlari 2026</span>
-        <h1>BILIMDAN NATIJAGACHA! 🎓🔥</h1>
-        <p>Sertifikat olishni maqsad qilganlar uchun yangi guruhlarga qabul boshlandi. Farzandingiz kelajagini biz bilan mustahkamlang!</p>
-        
-        <div class="reward-card">
-            <h3>🏆 PUL MUKOFOTI — 300$ 💵</h3>
-            <p>Bizda tayyorlanib, A yoki A+ sertifikat olgan har bir o'quvchiga 300$ pul mukofoti topshiriladi!</p>
-        </div>
-    </section>
-
+    <!-- Main Container -->
     <div class="container">
-
-        <div class="offer-card">
-            <div class="tag">Yangi Imkoniyat</div>
-            <h2 class="offer-title">🔥 8, 9, 10-Sinflar Uchun Kuchaytirilgan Sertifikat Guruhlari!</h2>
-            <p style="color: var(--gray-text);">Sifatli ta'lim va yuqori natija uchun darslarimiz doirasini yanada kengaytirdik!</p>
-
-            <div class="grid-2">
-                <div class="info-box">
-                    <h4>⚡ Dars Tizimi:</h4>
-                    <ul>
-                        <li><span>✅</span> <strong>2 ta kitobdan</strong> parallel darslar</li>
-                        <li><span>✅</span> Maxsus <strong>Sertifikat kitobi</strong> qo'shildi</li>
-                        <li><span>✅</span> Haftada <strong>4 kun</strong>, <strong>3 soatdan</strong></li>
-                    </ul>
+        
+        <!-- Default Landing / Hero -->
+        <div id="landingView">
+            <div class="hero">
+                <h1>Ziyo Lider Akademiyasi Ta'lim va Reyting Boshqaruvi</h1>
+                <p>Ustozlar, o'quvchilar va menejerlar uchun yagona raqamli platforma. Ballar, tangalar, akademik yulduzlar va to'lov nazorati barchasi bir joyda.</p>
+                <button class="btn btn-primary" style="background: white; color: var(--primary); padding: 0.85rem 2rem; font-size: 1.05rem;" onclick="openLoginModal()">
+                    <i class="fa-solid fa-user-lock"></i> Tizimga Kirish
+                </button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fa-solid fa-chalkboard-user"></i></div>
+                    <div class="stat-details">
+                        <h4>Ustoz</h4>
+                        <div class="value" style="font-size: 1.2rem; margin-top: 4px;">Diyorbek</div>
+                    </div>
                 </div>
-
-                <div class="price-box">
-                    <span class="old-price">Atrofdagi kurslarda: 450,000 - 500,000 so'm</span>
-                    <div class="new-price">350,000 so'm <span style="font-size: 0.9rem; font-weight: 400; color: #374151;">/ oyiga</span></div>
-                    <p style="color: #d97706; font-size: 0.85rem; font-weight: 700; margin-top: 5px;">⚠️ Barcha 8, 9, 10-sinflar uchun bir xil hamyonbop narx!</p>
+                <div class="stat-card">
+                    <div class="stat-icon cyan"><i class="fa-solid fa-user-shield"></i></div>
+                    <div class="stat-details">
+                        <h4>Menejer</h4>
+                        <div class="value" style="font-size: 1.2rem; margin-top: 4px;">Maqsud</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-code"></i></div>
+                    <div class="stat-details">
+                        <h4>Dasturchi</h4>
+                        <div class="value" style="font-size: 1.2rem; margin-top: 4px;">Nurbek</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon amber"><i class="fa-solid fa-star"></i></div>
+                    <div class="stat-details">
+                        <h4>Reyting Tizimi</h4>
+                        <div class="value" style="font-size: 1.2rem; margin-top: 4px;">10 Ball = 1 Yulduz</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="note">
-                <span>📌</span> <strong>Eslatma:</strong> Oylik to'lovlar har oyning 10-sanasidan kechikmasligi so'raladi.
+            <!-- PUBLIC LEADERBOARD TABLE (ASOSIY SAHifada REYTING JADVALI) -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-trophy" style="color: var(--warning);"></i> Top O'quvchilar Reytingi</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--gray);">Jami ballar asosida eng yaxshi o'quvchilar</span>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>O'rin</th>
+                                <th>O'quvchi F.I.O</th>
+                                <th>Guruh</th>
+                                <th>Jami Ball</th>
+                                <th>Tangalar</th>
+                                <th>Yulduzlar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="publicLeaderboardBody">
+                            <!-- Dynamic Leaderboard -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <h2 class="section-title">📚 O'quv Yo'nalishlari</h2>
-        <div class="grid-4">
-            <div class="course-card">
-                <div class="course-icon">📐</div>
-                <h3>Matematika</h3>
-                <p>Sertifikat va olimpiada tayyorlovi</p>
+        <!-- ================= USTOZ DASHBOARD ================= -->
+        <div id="ustozDashboard" class="dashboard">
+            <div class="dash-header">
+                <div class="user-info-badge">
+                    <div class="avatar" id="ustozAvatar">D</div>
+                    <div>
+                        <h3 id="ustozName">Diyorbek</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Ustoz Kabineti</p>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-danger" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+                </button>
             </div>
-            <div class="course-card">
-                <div class="course-icon">⚡</div>
-                <h3>Fizika</h3>
-                <p>Chuqurlashtirilgan masalalar</p>
+
+            <div class="card">
+                <div class="card-title">
+                    <span>O'quvchilar Baholari va Davomati</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--gray);">
+                        * Ustoz oxirgi 30 kun bo'yicha kunma-kun baho kiritishi/yangilashi mumkin.
+                    </span>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>O'quvchi F.I.O</th>
+                                <th>Guruh</th>
+                                <th>Jami Ball (old + so'nggi 30 kun)</th>
+                                <th>Tangalar</th>
+                                <th>Oyga qarash</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ustozGradeTableBody">
+                            <!-- Dynamic rows -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="course-card">
-                <div class="course-icon">🧪</div>
-                <h3>Kimyo & Biologiya</h3>
-                <p>Tibbiyot yo'nalishi uchun</p>
+
+            <!-- O'quvchilardan kelgan shikoyat va xabarlar paneli -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-envelope-open-text" style="color: var(--danger);"></i> O'quvchilardan "Bahomdan noroziman" xabarlari</span>
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>O'quvchi</th>
+                                <th>Guruh</th>
+                                <th>Xabar Matni</th>
+                                <th>Amal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ustozComplaintsBody">
+                            <!-- Dynamic messages -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="course-card">
-                <div class="course-icon">🇬🇧</div>
-                <h3>Ingliz Tili</h3>
-                <p>CEFR / IELTS tayyorlov</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">📖</div>
-                <h3>Ona Tili</h3>
-                <p>Grammatika va adabiyot</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">⚖️</div>
-                <h3>Tarix va Huquq</h3>
-                <p>Yurisprudensiya bloki</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">🇹🇷</div>
-                <h3>Turk Tili</h3>
-                <p>Sertifikat darajasi</p>
-            </div>
-            <div class="course-card">
-                <div class="course-icon">🧠</div>
-                <h3>Mantiq</h3>
-                <p>Olimpiada va mantiqiy fikrlash</p>
+
+            <!-- Password Change Section -->
+            <div class="card" style="max-width: 500px;">
+                <div class="card-title">Parolni O'zgartirish</div>
+                <div class="form-group">
+                    <label>Eski Parol</label>
+                    <input type="password" id="ustozOldPass" class="form-control" placeholder="Eski parolni kiriting">
+                </div>
+                <div class="form-group">
+                    <label>Yangi Parol</label>
+                    <input type="password" id="ustozNewPass" class="form-control" placeholder="Yangi parolni kiriting">
+                </div>
+                <button class="btn btn-primary" onclick="changeUstozPassword()">Parolni Yangilash</button>
             </div>
         </div>
 
-        <div class="contact-card">
-            <div class="contact-info">
-                <h3>📍 Murojaat va Qabul</h3>
-                <div class="contact-item">📌 <strong>Manzil:</strong> Navbahor tumani, Toshrabot MFY</div>
-                <div class="contact-item">📞 <strong>Tel:</strong> <a href="tel:+998945991341">+998 (94) 599-13-41</a></div>
-                <div class="contact-item">📞 <strong>Tel:</strong> <a href="tel:+998941146699">+998 (94) 114-66-99</a></div>
-                <div class="contact-item">✈️ <strong>Telegram:</strong> <a href="https://t.me/ziyo_ledir_akademiyasi" target="_blank">@ziyo_ledir_akademiyasi</a></div>
+        <!-- ================= MENEJER DASHBOARD ================= -->
+        <div id="menejerDashboard" class="dashboard">
+            <div class="dash-header">
+                <div class="user-info-badge">
+                    <div class="avatar" id="menejerAvatar">M</div>
+                    <div>
+                        <h3 id="menejerName">Maqsud</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Menejer Kabineti (Boshqaruv)</p>
+                    </div>
+                </div>
+                <button class="btn btn-outline btn-danger" onclick="logout()">
+                    <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+                </button>
             </div>
-            <div>
-                <p style="margin-bottom: 15px; font-size: 0.95rem; color: #a7f3d0;">Yangi guruhlarga joylar soni cheklangan! Hoziroq ro'yxatdan o'ting.</p>
-                <a href="tel:+998945991341" class="cta-btn">HOZIROQ BOG'LANISH</a>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchMenejerTab(event, 'mTabPayments')">To'lovlar & Xabarlar</button>
+                <button class="tab-btn" onclick="switchMenejerTab(event, 'mTabStudents')">O'quvchilar & Guruhlar</button>
+                <button class="tab-btn" onclick="switchMenejerTab(event, 'mTabManagement')">Ustoz & Guruh Ochish</button>
+            </div>
+
+            <!-- Tab 1: Payments & Warnings -->
+            <div id="mTabPayments" class="tab-content active">
+                <div class="card">
+                    <div class="card-title">O'quvchilarning To'lov Holati va Ogohlantirishlar</div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>O'quvchi</th>
+                                    <th>Guruh</th>
+                                    <th>To'lov Muddati / Sana</th>
+                                    <th>Holat xabari</th>
+                                    <th>Boshqaruv (Kun tanlash / To'landi)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="menejerPaymentTableBody">
+                                <!-- Dynamic payment rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: Students, Group Change & Password/Delete -->
+            <div id="mTabStudents" class="tab-content">
+                <div class="card">
+                    <div class="card-title">
+                        <span>O'quvchilar Ro'yxati, Guruhini O'zgartirish & Parollar</span>
+                        <button class="btn btn-primary" onclick="openAddStudentModal()"><i class="fa-solid fa-plus"></i> O'quvchi Qo'shish</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>F.I.O</th>
+                                    <th>Guruhni O'zgartirish</th>
+                                    <th>Login</th>
+                                    <th>Parol</th>
+                                    <th>Oy baholari</th>
+                                    <th>Amallar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="menejerStudentTableBody">
+                                <!-- Dynamic -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: Teachers & Groups Management -->
+            <div id="mTabManagement" class="tab-content">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                    <div class="card" style="margin-bottom: 0;">
+                        <div class="card-title">
+                            <span>Ustozlar</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="openAddTeacherModal()"><i class="fa-solid fa-plus"></i> Ustoz Qo'shish</button>
+                        </div>
+                        <div id="teacherListContainer"></div>
+                    </div>
+                    <div class="card" style="margin-bottom: 0;">
+                        <div class="card-title">
+                            <span>Guruhlar</span>
+                            <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="openAddGroupModal()"><i class="fa-solid fa-plus"></i> Guruh Ochish</button>
+                        </div>
+                        <div id="groupListContainer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menejer password change -->
+            <div class="card" style="max-width: 500px; margin-top: 2rem;">
+                <div class="card-title">Menejer Parolini O'zgartirish</div>
+                <div class="form-group">
+                    <label>Eski Parol</label>
+                    <input type="password" id="menejerOldPass" class="form-control" placeholder="Eski parolni kiriting">
+                </div>
+                <div class="form-group">
+                    <label>Yangi Parol</label>
+                    <input type="password" id="menejerNewPass" class="form-control" placeholder="Yangi parolni kiriting">
+                </div>
+                <button class="btn btn-primary" onclick="changeMenejerPassword()">Parolni Yangilash</button>
+            </div>
+        </div>
+
+        <!-- ================= O'QUVCHI DASHBOARD ================= -->
+        <div id="studentDashboard" class="dashboard">
+            <div class="dash-header">
+                <div class="user-info-badge">
+                    <div class="avatar" id="studentAvatar">O</div>
+                    <div>
+                        <h3 id="studentNameDisplay">O'quvchi</h3>
+                        <p style="color: var(--gray); font-size: 0.9rem;" id="studentGroupDisplay">Guruh: Web-101</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <!-- Academic Stars on right -->
+                    <div style="background: #fef3c7; border: 1px solid #fde68a; padding: 0.5rem 1rem; border-radius: 12px; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-star" style="color: #d97706;"></i>
+                        <div>
+                            <div style="font-size: 0.75rem; color: #92400e; font-weight: 600;">Akademik Yulduzlar</div>
+                            <div id="studentStarsCount" style="font-weight: 800; color: #b45309; font-size: 1.1rem;">0 ta</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline btn-danger" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Chiqish
+                    </button>
+                </div>
+            </div>
+
+            <!-- Payment Notification Banner -->
+            <div id="studentPaymentAlertContainer"></div>
+
+            <!-- Bahodan noroziman shikoyat yuborish tugmasi va bloki -->
+            <div class="card" style="background: #fffbeb; border-color: #fde68a;">
+                <div class="card-title" style="margin-bottom: 0.75rem; color: #92400e;">
+                    <span><i class="fa-solid fa-triangle-exclamation"></i> Bahoyingizdan norozimisiz?</span>
+                </div>
+                <p style="font-size: 0.95rem; color: #78350f; margin-bottom: 1rem;">Agar bahoyingiz adolatsiz qo'yilgan deb hisoblasangiz, ustozga bevosita xabar yuboring:</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="complaintInput" class="form-control" placeholder="Masalan: Kechagi bahoyimga e'tirozim bor, iltimos qayta ko'rib chiqing." style="background: white;">
+                    <button class="btn btn-primary" style="background: #d97706; white-space: nowrap;" onclick="sendComplaintToTeacher()">
+                        <i class="fa-solid fa-paper-plane"></i> Shikoyat yuborish
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fa-solid fa-chart-line"></i></div>
+                    <div class="stat-details">
+                        <h4>Jami Ball</h4>
+                        <div class="value" id="studentTotalScore">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon amber"><i class="fa-solid fa-coins"></i></div>
+                    <div class="stat-details">
+                        <h4>Tangalar (Achko)</h4>
+                        <div class="value" id="studentCoinsCount">0</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-award"></i></div>
+                    <div class="stat-details">
+                        <h4>Reyting O'rni</h4>
+                        <div class="value" id="studentRankBadge">1-o'rin</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Shop -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-store" style="color: var(--primary);"></i> Akademik Shop (Sovg'alar do'koni)</span>
+                    <span style="font-size: 0.9rem; color: var(--gray); font-weight: normal;">Tangalaringiz evaziga reyting uchun maxsus bezaklar oling!</span>
+                </div>
+                <div class="shop-grid">
+                    <div class="shop-item">
+                        <i class="fa-solid fa-medal"></i>
+                        <h5>Bronza Stiker & Ism Rangi</h5>
+                        <div class="price">10 tanga</div>
+                        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="buyItem(10, 'Bronza Stiker')">Sotib olish</button>
+                    </div>
+                    <div class="shop-item">
+                        <i class="fa-solid fa-award"></i>
+                        <h5>O'rtacha Stiker & Rang</h5>
+                        <div class="price">25 tanga</div>
+                        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="buyItem(25, 'O&#39;rtacha Stiker')">Sotib olish</button>
+                    </div>
+                    <div class="shop-item">
+                        <i class="fa-solid fa-gem"></i>
+                        <h5>O'rta Premium Yonuvchi Yozuv</h5>
+                        <div class="price">50 tanga</div>
+                        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="buyItem(50, 'O&#39;rta Premium Yonuvchi Yozuv')">Sotib olish</button>
+                    </div>
+                    <div class="shop-item">
+                        <i class="fa-solid fa-crown"></i>
+                        <h5>Premium VIP Effektlar</h5>
+                        <div class="price">100 tanga</div>
+                        <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="buyItem(100, 'Premium VIP Effektlar')">Sotib olish</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sotib olingan buyumlar inventari -->
+            <div class="card">
+                <div class="card-title">
+                    <span><i class="fa-solid fa-bag-shopping" style="color: var(--success);"></i> Sizning Inventaringiz (Sotib olganlaringiz)</span>
+                </div>
+                <div id="studentInventoryList" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <!-- Dinamik chiqadi -->
+                </div>
+            </div>
+
+            <!-- Grade History Table (now shows last 30 days) -->
+            <div class="card">
+                <div class="card-title">Sizning Baholar Tarixingiz (Oxirgi 30 kun)</div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sana</th>
+                                <th>Baho (Ball)</th>
+                                <th>Izoh</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentHistoryTableBody">
+                            <!-- Dynamic -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
     </div>
 
-    <footer style="text-align: center; padding: 25px; color: #94a3b8; font-size: 0.85rem; border-top: 1px solid #e2e8f0; margin-top: 20px;">
-        &copy; 2026 Nurbek IT servis. Barcha huquqlar himoyalangan.
-    </footer>
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal" style="max-width:420px;">
+            <div class="modal-header">
+                <h3>Tizimga Kirish</h3>
+                <button class="close-modal" onclick="closeLoginModal()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="form-group">
+                <label>Login</label>
+                <input type="text" id="loginInput" class="form-control" placeholder="Loginingizni kiriting">
+            </div>
+            <div class="form-group">
+                <label>Parol</label>
+                <input type="password" id="passwordInput" class="form-control" placeholder="Parolingizni kiriting">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center; padding: 0.85rem;" onclick="handleLogin()">
+                Kirish
+            </button>
+        </div>
+    </div>
 
+    <!-- Month Grades Modal (calendar-like) -->
+    <div class="modal-overlay" id="monthGradesModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="monthModalTitle">Oy baholari</h3>
+                <button class="close-modal" onclick="closeModal('monthGradesModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div style="margin-bottom:12px; color: var(--gray); font-size:0.95rem;">
+                Har bir kun uchun ball va qisqacha izoh kiriting. Bo'sh qoldirsangiz o'sha sana qiymati o'chiriladi.
+            </div>
+
+            <div id="monthCalendarContainer" class="calendar-grid">
+                <!-- Days will be rendered here -->
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:15px; justify-content:flex-end;">
+                <button class="btn btn-outline" onclick="closeModal('monthGradesModal')">Bekor qilish</button>
+                <button class="btn btn-primary" id="saveMonthGradesBtn" onclick="saveMonthGrades()">Saqlash</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Student Modal -->
+    <div class="modal-overlay" id="addStudentModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Yangi O'quvchi Qo'shish</h3>
+                <button class="close-modal" onclick="closeModal('addStudentModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="form-group">
+                <label>F.I.O</label>
+                <input type="text" id="newStudentName" class="form-control" placeholder="Ism familiyasi">
+            </div>
+            <div class="form-group">
+                <label>Guruh</label>
+                <select id="newStudentGroup" class="form-control">
+                    <!-- Dinamik guruhlar ro'yxati -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Login</label>
+                <input type="text" id="newStudentLogin" class="form-control" placeholder="login123">
+            </div>
+            <div class="form-group">
+                <label>Parol</label>
+                <input type="text" id="newStudentPass" class="form-control" placeholder="parol123">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="saveNewStudent()">Saqlash</button>
+        </div>
+    </div>
+
+    <!-- Add Teacher Modal -->
+    <div class="modal-overlay" id="addTeacherModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Yangi Ustoz Qo'shish</h3>
+                <button class="close-modal" onclick="closeModal('addTeacherModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="form-group">
+                <label>Ustoz F.I.O</label>
+                <input type="text" id="newTeacherName" class="form-control" placeholder="Ism familiyasi">
+            </div>
+            <div class="form-group">
+                <label>Login</label>
+                <input type="text" id="newTeacherLogin" class="form-control" placeholder="teacher_login">
+            </div>
+            <div class="form-group">
+                <label>Parol</label>
+                <input type="text" id="newTeacherPass" class="form-control" placeholder="parol">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="saveNewTeacher()">Saqlash</button>
+        </div>
+    </div>
+
+    <!-- Add Group Modal -->
+    <div class="modal-overlay" id="addGroupModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Yangi Guruh Ochish</h3>
+                <button class="close-modal" onclick="closeModal('addGroupModal')"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="form-group">
+                <label>Guruh Nomi</label>
+                <input type="text" id="newGroupName" class="form-control" placeholder="Masalan: Python-202">
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="saveNewGroup()">Guruh Ochish</button>
+        </div>
+    </div>
+
+    <script>
+        // --- Utility functions ---
+        function formatDate(d) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth()+1).padStart(2,'0');
+            const day = String(d.getDate()).padStart(2,'0');
+            return `${y}-${m}-${day}`;
+        }
+        function getLastNDays(n) {
+            const arr = [];
+            const today = new Date();
+            for (let i = n-1; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(today.getDate() - i);
+                arr.push(formatDate(d));
+            }
+            return arr;
+        }
+        function findGrade(history, date) {
+            return history.find(h => h.date === date) || null;
+        }
+
+        // Database State (gradesHistory added)
+        let db = JSON.parse(localStorage.getItem('edu_platform_db')) || {
+            teachers: [
+                { id: 1, name: "Diyorbek", login: "diyorbekteacher", pass: "diyorbek6699" }
+            ],
+            managers: [
+                { id: 1, name: "Maqsud", login: "maqsudgulmamatov", pass: "maqsud1341" }
+            ],
+            groups: ["Web-101", "Python-Standard", "Frontend Advanced"],
+            students: [
+                { 
+                    id: 1, 
+                    name: "Azizbek Rahimov", 
+                    group: "Web-101", 
+                    login: "aziz", 
+                    pass: "1234", 
+                    score: 45, 
+                    coins: 4, 
+                    paymentStatus: "pending", 
+                    paymentDate: "2026-03-15",
+                    grades: { old: 25, yesterday: 10, today: 10 },
+                    gradesHistory: [
+                        // sample last 5 days
+                        { date: "2026-08-30", value: 2, note: "" },
+                        { date: "2026-08-31", value: 1, note: "" },
+                        { date: "2026-09-01", value: 5, note: "" }
+                    ],
+                    inventory: []
+                },
+                { 
+                    id: 2, 
+                    name: "Madina Karimova", 
+                    group: "Web-101", 
+                    login: "madina", 
+                    pass: "1234", 
+                    score: 30, 
+                    coins: 3, 
+                    paymentStatus: "paid", 
+                    paymentDate: "",
+                    grades: { old: 15, yesterday: 5, today: 10 },
+                    gradesHistory: [
+                        { date: "2026-08-30", value: 3, note: "Yaxshi" },
+                        { date: "2026-09-01", value: 7, note: "" }
+                    ],
+                    inventory: []
+                },
+                { 
+                    id: 3, 
+                    name: "Jasur Toshmatov", 
+                    group: "Python-Standard", 
+                    login: "jasur", 
+                    pass: "1234", 
+                    score: 20, 
+                    coins: 2, 
+                    paymentStatus: "pending", 
+                    paymentDate: "2026-03-10",
+                    grades: { old: 10, yesterday: 5, today: 5 },
+                    gradesHistory: [
+                        { date: "2026-08-28", value: 2, note: "" },
+                        { date: "2026-08-29", value: 3, note: "" }
+                    ],
+                    inventory: []
+                }
+            ],
+            complaints: []
+        };
+
+        let currentUser = null;
+        let currentRole = null; 
+        let editingMonthStudentId = null;
+        let monthEditableMode = true; // when manager opens modal, set false
+
+        function saveDB() {
+            localStorage.setItem('edu_platform_db', JSON.stringify(db));
+            renderPublicLeaderboard();
+        }
+
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        // Render Public Leaderboard on Home Page
+        function renderPublicLeaderboard() {
+            const tbody = document.getElementById('publicLeaderboardBody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            
+            let sorted = [...db.students].sort((a,b) => b.score - a.score);
+            if (sorted.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; color: var(--gray);">Hozircha o'quvchilar yo'q.</td></tr>`;
+                return;
+            }
+
+            sorted.forEach((st, index) => {
+                let stars = Math.floor(st.score / 10);
+                let medalIcon = '';
+                if (index === 0) medalIcon = '<i class="fa-solid fa-medal" style="color: #f59e0b; font-size: 1.2rem;"></i> ';
+                else if (index === 1) medalIcon = '<i class="fa-solid fa-medal" style="color: #94a3b8; font-size: 1.2rem;"></i> ';
+                else if (index === 2) medalIcon = '<i class="fa-solid fa-medal" style="color: #b45309; font-size: 1.2rem;"></i> ';
+
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${medalIcon} #${index + 1}</b></td>
+                    <td><b>${st.name}</b></td>
+                    <td><span class="badge" style="background: #e0e7ff; color: var(--primary);">${st.group}</span></td>
+                    <td><b>${st.score}</b></td>
+                    <td style="color: var(--warning);"><i class="fa-solid fa-coins"></i> ${st.coins}</td>
+                    <td style="color: #d97706;"><i class="fa-solid fa-star"></i> ${stars} ta</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function handleLogin() {
+            const login = document.getElementById('loginInput').value.trim();
+            const pass = document.getElementById('passwordInput').value.trim();
+
+            const foundTeacher = db.teachers.find(t => t.login === login && t.pass === pass);
+            if (foundTeacher) {
+                currentUser = foundTeacher;
+                currentRole = 'ustoz';
+                closeLoginModal();
+                initDashboard();
+                return;
+            }
+
+            const foundManager = db.managers.find(m => m.login === login && m.pass === pass);
+            if (foundManager) {
+                currentUser = foundManager;
+                currentRole = 'menejer';
+                closeLoginModal();
+                initDashboard();
+                return;
+            }
+
+            const foundStudent = db.students.find(s => s.login === login && s.pass === pass);
+            if (foundStudent) {
+                currentUser = foundStudent;
+                currentRole = 'student';
+                closeLoginModal();
+                initDashboard();
+                return;
+            }
+
+            alert("Login yoki parol noto'g'ri!");
+        }
+
+        function logout() {
+            currentUser = null;
+            currentRole = null;
+            document.getElementById('landingView').style.display = 'block';
+            document.querySelectorAll('.dashboard').forEach(d => d.classList.remove('active'));
+            document.getElementById('headerNavActions').innerHTML = `
+                <button class="btn btn-primary" onclick="openLoginModal()">
+                    <i class="fa-solid fa-right-to-bracket"></i> Kirish
+                </button>
+            `;
+            renderPublicLeaderboard();
+        }
+
+        function initDashboard() {
+            document.getElementById('landingView').style.display = 'none';
+            document.querySelectorAll('.dashboard').forEach(d => d.classList.remove('active'));
+
+            if (currentRole === 'ustoz') {
+                document.getElementById('ustozDashboard').classList.add('active');
+                document.getElementById('ustozName').innerText = currentUser.name;
+                document.getElementById('ustozAvatar').innerText = currentUser.name.charAt(0);
+                renderUstozTable();
+                renderUstozComplaints();
+            } else if (currentRole === 'menejer') {
+                document.getElementById('menejerDashboard').classList.add('active');
+                document.getElementById('menejerName').innerText = currentUser.name;
+                document.getElementById('menejerAvatar').innerText = currentUser.name.charAt(0);
+                renderMenejerPayments();
+                renderMenejerStudents();
+                renderMenejerManagement();
+            } else if (currentRole === 'student') {
+                document.getElementById('studentDashboard').classList.add('active');
+                renderStudentDashboard();
+            }
+
+            document.getElementById('headerNavActions').innerHTML = `
+                <span style="font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-user-circle" style="color: var(--primary);"></i> ${currentUser.name}</span>
+                <button class="btn btn-outline btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="logout()">Chiqish</button>
+            `;
+        }
+
+        // --- USTOZ: render list with button to open monthly calendar ---
+        function renderUstozTable() {
+            const tbody = document.getElementById('ustozGradeTableBody');
+            tbody.innerHTML = '';
+            db.students.forEach(st => {
+                // compute last 30 day sum
+                const last30 = getLastNDays(30);
+                const sumLast30 = st.gradesHistory ? st.gradesHistory.filter(h => last30.includes(h.date)).reduce((s, x) => s + (Number(x.value) || 0), 0) : 0;
+                const totalScore = (st.grades.old || 0) + sumLast30;
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${st.name}</b></td>
+                    <td><span class="badge" style="background: #e0e7ff; color: var(--primary);">${st.group}</span></td>
+                    <td><b>${totalScore}</b></td>
+                    <td style="color: var(--warning);"><i class="fa-solid fa-coins"></i> ${Math.floor(totalScore/10)}</td>
+                    <td>
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn btn-primary" onclick="openMonthGradesModal(${st.id}, true)"><i class="fa-solid fa-calendar-days"></i> Oyga qarash</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Open month calendar modal for student (editable for teacher, read-only for manager)
+        function openMonthGradesModal(studentId, editable = true) {
+            editingMonthStudentId = studentId;
+            monthEditableMode = editable;
+            const st = db.students.find(s => s.id === studentId);
+            if (!st) return;
+            document.getElementById('monthModalTitle').innerText = `Oy baholari — ${st.name}`;
+            renderMonthGradesModal(st, editable);
+            document.getElementById('monthGradesModal').classList.add('active');
+            // disable save button if not editable
+            document.getElementById('saveMonthGradesBtn').style.display = editable ? 'inline-flex' : 'none';
+        }
+
+        function renderMonthGradesModal(student, editable) {
+            const container = document.getElementById('monthCalendarContainer');
+            container.innerHTML = '';
+            const days = getLastNDays(30);
+            const history = student.gradesHistory || [];
+            days.forEach(date => {
+                const found = findGrade(history, date);
+                const val = found ? found.value : '';
+                const note = found ? (found.note || '') : '';
+                const dayDiv = document.createElement('div');
+                dayDiv.className = 'calendar-day';
+                dayDiv.innerHTML = `
+                    <div class="day-header">${date}</div>
+                    <div style="width:100%;">
+                        <input type="number" min="0" max="100" class="form-control day-grade-input" data-date="${date}" value="${val}" ${!editable ? 'disabled' : ''} placeholder="ball">
+                    </div>
+                    <div style="width:100%;">
+                        <textarea rows="2" class="day-note-input" data-date="${date}" ${!editable ? 'disabled' : ''} placeholder="izoh">${note}</textarea>
+                    </div>
+                `;
+                container.appendChild(dayDiv);
+            });
+        }
+
+        function saveMonthGrades() {
+            if (!editingMonthStudentId) return;
+            const st = db.students.find(s => s.id === editingMonthStudentId);
+            if (!st) return;
+            const inputs = Array.from(document.querySelectorAll('.day-grade-input'));
+            if (!st.gradesHistory) st.gradesHistory = [];
+            inputs.forEach(inp => {
+                const date = inp.dataset.date;
+                const value = inp.value === '' ? null : Number(inp.value);
+                const noteEl = document.querySelector(`.day-note-input[data-date="${date}"]`);
+                const note = noteEl ? noteEl.value.trim() : '';
+                const existingIdx = st.gradesHistory.findIndex(h => h.date === date);
+                if ((value === null || value === 0 || value === '') && existingIdx !== -1) {
+                    // if blank or zero, remove existing record
+                    st.gradesHistory.splice(existingIdx,1);
+                } else if (value !== null && value !== '' && !isNaN(value)) {
+                    if (existingIdx !== -1) {
+                        st.gradesHistory[existingIdx].value = value;
+                        st.gradesHistory[existingIdx].note = note;
+                    } else {
+                        st.gradesHistory.push({ date, value, note });
+                    }
+                }
+            });
+
+            // recompute score: old + sum(last30)
+            const last30 = getLastNDays(30);
+            const sumLast30 = st.gradesHistory.filter(h => last30.includes(h.date)).reduce((s,x)=> s + (Number(x.value)||0), 0);
+            st.score = (st.grades && st.grades.old ? st.grades.old : 0) + sumLast30;
+            st.coins = Math.floor(st.score/10);
+
+            saveDB();
+            closeModal('monthGradesModal');
+            renderUstozTable();
+            renderStudentDashboardIfCurrent(st.id);
+            renderMenejerStudents(); // update manager view if open
+            alert("Oy baholari saqlandi!");
+        }
+
+        function renderStudentDashboardIfCurrent(studentId) {
+            if (currentRole === 'student' && currentUser && currentUser.id === studentId) {
+                currentUser = db.students.find(s => s.id === studentId);
+                renderStudentDashboard();
+            }
+            // if teacher viewing student list, updates handled by renderUstozTable
+        }
+
+        function renderUstozComplaints() {
+            const tbody = document.getElementById('ustozComplaintsBody');
+            tbody.innerHTML = '';
+            if (!db.complaints || db.complaints.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--gray);">Hozircha shikoyat va xabarlar yo'q.</td></tr>`;
+                return;
+            }
+            db.complaints.forEach((c, index) => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${c.studentName}</b></td>
+                    <td><span class="badge" style="background: #e0e7ff; color: var(--primary);">${c.group}</span></td>
+                    <td style="color: #92400e;">${c.text}</td>
+                    <td>
+                        <button class="btn btn-success" style="padding: 0.35rem 0.75rem; font-size: 0.8rem;" onclick="resolveComplaint(${index})">Ko'rib chiqdim / O'chirish</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function resolveComplaint(index) {
+            db.complaints.splice(index, 1);
+            saveDB();
+            renderUstozComplaints();
+        }
+
+        function changeUstozPassword() {
+            let oldP = document.getElementById('ustozOldPass').value;
+            let newP = document.getElementById('ustozNewPass').value;
+            if (oldP !== currentUser.pass) {
+                alert("Eski parol xato!");
+                return;
+            }
+            if (!newP) {
+                alert("Yangi parolni kiriting!");
+                return;
+            }
+            
+            currentUser.pass = newP;
+            let t = db.teachers.find(x => x.id === currentUser.id);
+            if (t) t.pass = newP;
+            saveDB();
+            alert("Parol muvaffaqiyatli o'zgartirildi!");
+            document.getElementById('ustozOldPass').value = '';
+            document.getElementById('ustozNewPass').value = '';
+        }
+
+        function switchMenejerTab(e, tabId) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function renderMenejerPayments() {
+            const tbody = document.getElementById('menejerPaymentTableBody');
+            tbody.innerHTML = '';
+            const today = new Date();
+
+            db.students.forEach(st => {
+                let alertHtml = '';
+                let daysText = '';
+
+                if (st.paymentStatus === 'paid') {
+                    alertHtml = `<span class="badge badge-success">To'langan</span>`;
+                    daysText = `To'lov qilingan`;
+                } else if (!st.paymentDate) {
+                    alertHtml = `<span class="badge badge-warning">Sana belgilanmagan</span>`;
+                    daysText = `Muddati belgilanmagan`;
+                } else {
+                    let pDate = new Date(st.paymentDate);
+                    let diffTime = pDate - today;
+                    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                    if (diffDays > 0 && diffDays <= 5) {
+                        alertHtml = `<span class="badge badge-warning">To'lovga ${diffDays} kun qoldi!</span>`;
+                        daysText = `${diffDays} kun qoldi`;
+                    } else if (diffDays === 0) {
+                        alertHtml = `<span class="badge badge-danger">To'lovga 0 kun qoldi!</span>`;
+                        daysText = `Bugun oxirgi kun`;
+                    } else if (diffDays < 0) {
+                        let passed = Math.abs(diffDays);
+                        alertHtml = `<span class="badge badge-danger">Minusda! ${passed} kun o'tdi</span>`;
+                        daysText = `${passed} kun kechikdi`;
+                    } else {
+                        alertHtml = `<span class="badge badge-success">Muddati bor (${diffDays} kun)</span>`;
+                        daysText = `${diffDays} kun qoldi`;
+                    }
+                }
+
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${st.name}</b></td>
+                    <td>${st.group}</td>
+                    <td>
+                        <input type="date" value="${st.paymentDate}" onchange="updatePaymentDate(${st.id}, this.value)" class="form-control" style="padding: 6px; width: 140px;">
+                    </td>
+                    <td>${alertHtml} (${daysText})</td>
+                    <td>
+                        <button class="btn btn-success" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="markAsPaid(${st.id})">To'landi</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updatePaymentDate(id, dateStr) {
+            let st = db.students.find(s => s.id === id);
+            if (st) {
+                st.paymentDate = dateStr;
+                st.paymentStatus = 'pending';
+                saveDB();
+                renderMenejerPayments();
+            }
+        }
+
+        function markAsPaid(id) {
+            let st = db.students.find(s => s.id === id);
+            if (st) {
+                st.paymentStatus = 'paid';
+                saveDB();
+                renderMenejerPayments();
+                alert(`${st.name} uchun to'lov tasdiqlandi!`);
+            }
+        }
+
+        // Manager students table includes button to view month (read-only)
+        function renderMenejerStudents() {
+            const tbody = document.getElementById('menejerStudentTableBody');
+            tbody.innerHTML = '';
+            db.students.forEach(st => {
+                let groupOptions = '';
+                db.groups.forEach(g => {
+                    let selected = (g === st.group) ? 'selected' : '';
+                    groupOptions += `<option value="${g}" ${selected}>${g}</option>`;
+                });
+
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><b>${st.name}</b></td>
+                    <td>
+                        <select class="form-control" style="padding: 6px; width: 150px;" onchange="changeStudentGroup(${st.id}, this.value)">
+                            ${groupOptions}
+                        </select>
+                    </td>
+                    <td><code>${st.login}</code></td>
+                    <td><input type="text" value="${st.pass}" id="st_pass_${st.id}" class="form-control" style="padding: 6px; width: 120px;"></td>
+                    <td>
+                        <button class="btn btn-outline" onclick="openMonthGradesModal(${st.id}, false)"><i class="fa-solid fa-eye"></i> Oy baholari</button>
+                    </td>
+                    <td>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="saveStudentPassword(${st.id})">Yangilash</button>
+                            <button class="btn btn-danger" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;" onclick="deleteStudent(${st.id})">O'chirish</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function changeStudentGroup(id, newGroup) {
+            let st = db.students.find(s => s.id === id);
+            if (st) {
+                st.group = newGroup;
+                saveDB();
+                alert(`${st.name} ning guruhi "${newGroup}" ga o'zgartirildi!`);
+            }
+        }
+
+        function deleteStudent(id) {
+            if (confirm("Haqiqatan ham ushbu o'quvchini tizimdan o'chirmoqchimisiz?")) {
+                db.students = db.students.filter(s => s.id !== id);
+                saveDB();
+                renderMenejerStudents();
+                renderMenejerPayments();
+                alert("O'quvchi muvaffaqiyatli o'chirildi!");
+            }
+        }
+
+        function saveStudentPassword(id) {
+            let st = db.students.find(s => s.id === id);
+            let val = document.getElementById(`st_pass_${id}`).value;
+            if (st && val) {
+                st.pass = val;
+                saveDB();
+                alert("O'quvchi paroli o'zgartirildi!");
+            }
+        }
+
+        function renderMenejerManagement() {
+            let tCont = document.getElementById('teacherListContainer');
+            tCont.innerHTML = '';
+            db.teachers.forEach(t => {
+                tCont.innerHTML += `
+                    <div style="background: var(--light); padding: 12px 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--border);">
+                        <div><b>${t.name}</b> <br><small style="color: var(--gray);">Login: ${t.login} | Parol: ${t.pass}</small></div>
+                    </div>
+                `;
+            });
+
+            let gCont = document.getElementById('groupListContainer');
+            gCont.innerHTML = '';
+            db.groups.forEach(g => {
+                gCont.innerHTML += `
+                    <div style="background: var(--light); padding: 12px 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--border);">
+                        <div><b>${g}</b></div>
+                    </div>
+                `;
+            });
+        }
+
+        function openAddStudentModal() {
+            let sel = document.getElementById('newStudentGroup');
+            sel.innerHTML = '';
+            db.groups.forEach(g => {
+                sel.innerHTML += `<option value="${g}">${g}</option>`;
+            });
+            document.getElementById('addStudentModal').classList.add('active');
+        }
+
+        function saveNewStudent() {
+            let name = document.getElementById('newStudentName').value;
+            let group = document.getElementById('newStudentGroup').value;
+            let login = document.getElementById('newStudentLogin').value;
+            let pass = document.getElementById('newStudentPass').value;
+            if (!name || !login || !pass) {
+                alert("Barcha maydonlarni to'ldiring!");
+                return;
+            }
+            db.students.push({
+                id: Date.now(),
+                name, group, login, pass,
+                score: 0, coins: 0,
+                paymentStatus: 'pending', paymentDate: '',
+                grades: { old: 0, yesterday: 0, today: 0 },
+                gradesHistory: [],
+                inventory: []
+            });
+            saveDB();
+            closeModal('addStudentModal');
+            renderMenejerStudents();
+            renderMenejerPayments();
+            alert("Yangi o'quvchi qo'shildi!");
+        }
+
+        function openAddTeacherModal() { document.getElementById('addTeacherModal').classList.add('active'); }
+        function saveNewTeacher() {
+            let name = document.getElementById('newTeacherName').value;
+            let login = document.getElementById('newTeacherLogin').value;
+            let pass = document.getElementById('newTeacherPass').value;
+            if (!name || !login || !pass) return;
+            db.teachers.push({ id: Date.now(), name, login, pass });
+            saveDB();
+            closeModal('addTeacherModal');
+            renderMenejerManagement();
+            alert("Yangi ustoz qo'shildi!");
+        }
+
+        function openAddGroupModal() { document.getElementById('addGroupModal').classList.add('active'); }
+        function saveNewGroup() {
+            let gName = document.getElementById('newGroupName').value;
+            if (!gName) return;
+            db.groups.push(gName);
+            saveDB();
+            closeModal('addGroupModal');
+            renderMenejerManagement();
+            alert("Yangi guruh ochildi!");
+        }
+
+        function changeMenejerPassword() {
+            let oldP = document.getElementById('menejerOldPass').value;
+            let newP = document.getElementById('menejerNewPass').value;
+            if (oldP !== currentUser.pass) {
+                alert("Eski parol xato!");
+                return;
+            }
+            if (!newP) return;
+            currentUser.pass = newP;
+            let m = db.managers.find(x => x.id === currentUser.id);
+            if (m) m.pass = newP;
+            saveDB();
+            alert("Menejer paroli o'zgartirildi!");
+        }
+
+        function renderStudentDashboard() {
+            let st = currentUser;
+            if (!st.inventory) st.inventory = [];
+
+            document.getElementById('studentNameDisplay').innerText = st.name;
+            document.getElementById('studentGroupDisplay').innerText = "Guruh: " + st.group;
+            document.getElementById('studentAvatar').innerText = st.name.charAt(0);
+            
+            document.getElementById('studentTotalScore').innerText = st.score;
+            document.getElementById('studentCoinsCount').innerText = st.coins;
+            
+            let stars = Math.floor(st.score / 10);
+            document.getElementById('studentStarsCount').innerText = stars + " ta";
+
+            let sortedStudents = [...db.students].sort((a,b) => b.score - a.score);
+            let rank = sortedStudents.findIndex(s => s.id === st.id) + 1;
+            document.getElementById('studentRankBadge').innerText = rank + "-o'rin";
+
+            renderStudentPaymentAlert(st);
+
+            let invContainer = document.getElementById('studentInventoryList');
+            invContainer.innerHTML = '';
+            if (st.inventory.length === 0) {
+                invContainer.innerHTML = `<p style="color: var(--gray); font-size: 0.9rem;">Hozircha hech qanday buyum sotib olmagansiz.</p>`;
+            } else {
+                st.inventory.forEach(item => {
+                    invContainer.innerHTML += `<span class="badge badge-success" style="padding: 0.6rem 1rem; font-size: 0.9rem;"><i class="fa-solid fa-check"></i> ${item}</span>`;
+                });
+            }
+
+            // Student history: show last 30 days
+            const tbody = document.getElementById('studentHistoryTableBody');
+            tbody.innerHTML = '';
+            const days = getLastNDays(30);
+            const history = st.gradesHistory || [];
+            let any = false;
+            days.reverse(); // show newest first
+            days.forEach(date => {
+                const g = findGrade(history, date);
+                if (g) {
+                    any = true;
+                    tbody.innerHTML += `<tr><td>${date}</td><td><b>${g.value}</b></td><td>${g.note || ''}</td></tr>`;
+                } else {
+                    tbody.innerHTML += `<tr><td>${date}</td><td style="color: var(--gray);">-</td><td></td></tr>`;
+                }
+            });
+            days.reverse();
+
+            if (!any) {
+                // leave all rows but note none entered
+                // (we keep showing days with '-' so student sees blank days)
+            }
+        }
+
+        function sendComplaintToTeacher() {
+            let text = document.getElementById('complaintInput').value.trim();
+            if (!text) {
+                alert("Iltimos, xabar yoki shikoyat matnini kiriting!");
+                return;
+            }
+            if (!db.complaints) db.complaints = [];
+            db.complaints.push({
+                studentId: currentUser.id,
+                studentName: currentUser.name,
+                group: currentUser.group,
+                text: text
+            });
+            saveDB();
+            document.getElementById('complaintInput').value = '';
+            alert("Shikoyatingiz ustozga muvaffaqiyatli yuborildi!");
+            // if teacher logged in, refresh complaints
+            if (currentRole === 'ustoz') renderUstozComplaints();
+        }
+
+        function renderStudentPaymentAlert(st) {
+            const container = document.getElementById('studentPaymentAlertContainer');
+            container.innerHTML = '';
+
+            if (st.paymentStatus === 'paid') {
+                container.innerHTML = `
+                    <div class="alert-banner success">
+                        <span><i class="fa-solid fa-circle-check"></i> To'lovingiz to'liq qilingan. Rahmat!</span>
+                        <span class="badge badge-success">Faol</span>
+                    </div>
+                `;
+                return;
+            }
+
+            if (!st.paymentDate) {
+                container.innerHTML = `
+                    <div class="alert-banner warning">
+                        <span><i class="fa-solid fa-triangle-exclamation"></i> To'lov sanasi hali menejer tomonidan belgilanmagan.</span>
+                    </div>
+                `;
+                return;
+            }
+
+            let today = new Date();
+            let pDate = new Date(st.paymentDate);
+            let diffTime = pDate - today;
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 0 && diffDays <= 5) {
+                container.innerHTML = `
+                    <div class="alert-banner warning">
+                        <span><i class="fa-solid fa-bell"></i> Diqqat! Oylik to'lovni qilishga <b>${diffDays} kun qoldi</b>. Iltimos o'z vaqtida to'lang!</span>
+                        <span class="badge badge-warning">${diffDays} kun qoldi</span>
+                    </div>
+                `;
+            } else if (diffDays === 0) {
+                container.innerHTML = `
+                    <div class="alert-banner">
+                        <span><i class="fa-solid fa-triangle-exclamation"></i> Diqqat! To'lov qilishga <b>0 kun qoldi</b> (Bugun oxirgi kun).</span>
+                        <span class="badge badge-danger">Bugun</span>
+                    </div>
+                `;
+            } else if (diffDays < 0) {
+                let passed = Math.abs(diffDays);
+                container.innerHTML = `
+                    <div class="alert-banner">
+                        <span><i class="fa-solid fa-triangle-exclamation"></i> To'lov muddati o'tib ketdi! <b>Minusga o'tdi: ${passed} kun</b> kechikdi. Menejer tasdiqlaguncha davom etadi.</span>
+                        <span class="badge badge-danger">Minus ${passed} kun</span>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="alert-banner success">
+                        <span><i class="fa-solid fa-circle-info"></i> To'lovga yana ${diffDays} kun vaqt bor.</span>
+                    </div>
+                `;
+            }
+        }
+
+        function buyItem(cost, itemName) {
+            let st = currentUser;
+            if (!st.inventory) st.inventory = [];
+
+            if (st.coins < cost) {
+                alert("Tangalaringiz yetarli emas! Ko'proq ball to'plang.");
+                return;
+            }
+            st.coins -= cost;
+            st.inventory.push(itemName);
+            saveDB();
+            renderStudentDashboard();
+            alert(`Tabriklayman! Siz "${itemName}" ni muvaffaqiyatli sotib oldingiz!`);
+        }
+
+        // Sahifa yuklanganda reyting jadvalini chiqarish
+        window.onload = function() {
+            renderPublicLeaderboard();
+        };
+    </script>
 </body>
 </html>
