@@ -38,6 +38,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Navigation Header */
@@ -196,6 +197,9 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             transform: scale(0.95) translateY(10px);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Important for mobile: limit height and allow internal scroll */
+            max-height: 90vh;
+            overflow: auto;
         }
 
         .modal-overlay.active .modal {
@@ -248,7 +252,7 @@
 
         .form-control {
             width: 100%;
-            padding: 0.85rem 1rem;
+            padding: 0.95rem 1rem; /* a bit larger for touch */
             border: 1px solid var(--border);
             border-radius: var(--radius);
             font-size: 1rem;
@@ -547,6 +551,7 @@
         }
 
         /* Calendar grid in modal */
+        /* Default grid for desktop */
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -566,11 +571,12 @@
         .calendar-day .day-header {
             font-weight: 700;
             font-size: 0.85rem;
+            white-space: nowrap;
         }
         .calendar-day input[type="number"] {
             width: 100%;
             border-radius: 8px;
-            padding: 6px;
+            padding: 8px;
             border: 1px solid var(--border);
         }
         .calendar-day textarea {
@@ -580,6 +586,40 @@
             border: 1px solid var(--border);
             resize: vertical;
             font-size: 0.85rem;
+        }
+
+        /* MOBILE ADAPTATIONS: make the calendar horizontally scrollable and day cards wider for touch */
+        @media (max-width: 720px) {
+            .modal {
+                padding: 1rem 1rem;
+                max-width: 95%;
+            }
+            .calendar-grid {
+                display: flex;
+                gap: 12px;
+                overflow-x: auto;
+                padding-bottom: 8px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .calendar-day {
+                min-width: 220px; /* wide enough for inputs on mobile */
+                flex: 0 0 220px;
+                align-items: stretch;
+            }
+            .modal-header h3 {
+                font-size: 1.1rem;
+            }
+            .btn {
+                font-size: 0.95rem;
+            }
+            .form-control {
+                padding: 0.85rem 0.9rem;
+            }
+            /* ensure save button area is visible (reduce padding around it) */
+            #saveMonthGradesBtn {
+                padding: 0.7rem 1rem;
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -1005,7 +1045,7 @@
         </div>
     </div>
 
-    <!-- Month Grades Modal (calendar-like) -->
+    <!-- Month Grades Modal -->
     <div class="modal-overlay" id="monthGradesModal">
         <div class="modal">
             <div class="modal-header">
@@ -1195,12 +1235,15 @@
 
         function openLoginModal() {
             document.getElementById('loginModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
         function closeLoginModal() {
             document.getElementById('loginModal').classList.remove('active');
+            document.body.style.overflow = '';
         }
         function closeModal(id) {
             document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         // Render Public Leaderboard on Home Page
@@ -1344,6 +1387,7 @@
             document.getElementById('monthModalTitle').innerText = `Oy baholari — ${st.name}`;
             renderMonthGradesModal(st, editable);
             document.getElementById('monthGradesModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
             // disable save button if not editable
             document.getElementById('saveMonthGradesBtn').style.display = editable ? 'inline-flex' : 'none';
         }
@@ -1353,14 +1397,29 @@
             container.innerHTML = '';
             const days = getLastNDays(30);
             const history = student.gradesHistory || [];
+
+            const isMobile = window.innerWidth <= 720;
+
             days.forEach(date => {
                 const found = findGrade(history, date);
                 const val = found ? found.value : '';
                 const note = found ? (found.note || '') : '';
                 const dayDiv = document.createElement('div');
                 dayDiv.className = 'calendar-day';
+
+                // For mobile we show compact header (day + short month). But keep data-date attribute as full date.
+                let headerText = date;
+                if (isMobile) {
+                    try {
+                        const dObj = new Date(date + 'T00:00:00'); // ensure timezone safe
+                        headerText = dObj.toLocaleDateString(undefined, { day: 'numeric', month: 'short' }); // e.g., "5 Sep"
+                    } catch (e) {
+                        headerText = date;
+                    }
+                }
+
                 dayDiv.innerHTML = `
-                    <div class="day-header">${date}</div>
+                    <div class="day-header">${headerText}</div>
                     <div style="width:100%;">
                         <input type="number" min="0" max="100" class="form-control day-grade-input" data-date="${date}" value="${val}" ${!editable ? 'disabled' : ''} placeholder="ball">
                     </div>
@@ -1370,6 +1429,11 @@
                 `;
                 container.appendChild(dayDiv);
             });
+
+            // after rendering, ensure horizontal position at start for mobile
+            if (isMobile) {
+                container.scrollLeft = 0;
+            }
         }
 
         function saveMonthGrades() {
@@ -1639,6 +1703,7 @@
                 sel.innerHTML += `<option value="${g}">${g}</option>`;
             });
             document.getElementById('addStudentModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function saveNewStudent() {
@@ -1666,7 +1731,7 @@
             alert("Yangi o'quvchi qo'shildi!");
         }
 
-        function openAddTeacherModal() { document.getElementById('addTeacherModal').classList.add('active'); }
+        function openAddTeacherModal() { document.getElementById('addTeacherModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
         function saveNewTeacher() {
             let name = document.getElementById('newTeacherName').value;
             let login = document.getElementById('newTeacherLogin').value;
@@ -1679,7 +1744,7 @@
             alert("Yangi ustoz qo'shildi!");
         }
 
-        function openAddGroupModal() { document.getElementById('addGroupModal').classList.add('active'); }
+        function openAddGroupModal() { document.getElementById('addGroupModal').classList.add('active'); document.body.style.overflow = 'hidden'; }
         function saveNewGroup() {
             let gName = document.getElementById('newGroupName').value;
             if (!gName) return;
@@ -1857,6 +1922,16 @@
         window.onload = function() {
             renderPublicLeaderboard();
         };
+
+        // Close modal if overlay clicked (optional nicety)
+        document.querySelectorAll('.modal-overlay').forEach(ov => {
+            ov.addEventListener('click', function(e) {
+                if (e.target === ov) {
+                    ov.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
     </script>
 </body>
 </html>
